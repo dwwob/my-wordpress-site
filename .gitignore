@@ -1,15 +1,22 @@
-# Ignore the Podman database backup cache volume context
-wp-content-locked/
-
-# Exclude core server files (Only track your custom layouts)
+# 1. Ignore core engine files loose in the root folder
 wp-admin/
 wp-includes/
 *.php
+LICENSE
+README.md
 
-# Explicitly bypass structural cascade rules to lock onto your custom theme folder
-!wp-content/
-wp-content/*
-!wp-content/themes/
-wp-content/themes/*
-!wp-content/themes/beginner-developer-theme/
+# 2. Ignore database volume layers
+wp-content-locked/
+
+# 3. Explicitly block core content subfolders while whitelisting your theme
+wp-content/languages/
+wp-content/plugins/
+wp-content/uploads/
+wp-content/index.php
+
+# 4. Explicitly block default themes while whitelisting yours
+wp-content/themes/twentytwentythree/
+wp-content/themes/twentytwentyfour/
+wp-content/themes/twentytwentyfive/
+wp-content/themes/index.php
 
