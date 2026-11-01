@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  database:
+    # Explicitly use Docker Hub to avoid the openSUSE tag error
+    image: docker.io/library/mariadb:latest
+    container_name: wp-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecretroot
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_secure_password
+    volumes:
+      - db_data:/var/lib/mysql:Z
+
+  wordpress:
+    # Explicitly use Docker Hub here too
+    image: docker.io/library/wordpress:latest
+    container_name: wp-app
+    restart: always
+    userns: keep-id
+    group_add:
+      - "33"
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_secure_password
+      WORDPRESS_DB_NAME: wordpress_db
+
+       # WAKES UP THE INTERNAL WORDPRESS ERROR LOGGING
+      WORDPRESS_DEBUG: 1
+      
+      # INJECTS THE VISIBLE BROWSER DISPLAY CONSTANTS AT RUNTIME
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_DISPLAY', true );
+        define( 'WP_DEBUG_LOG', true );
+
+    volumes:
+      - ./wp-content:/var/www/html/wp-content:Z
+
+volumes:
+  db_data:
+

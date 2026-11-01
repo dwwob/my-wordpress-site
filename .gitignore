@@ -1,0 +1,16 @@
+# Ignore the Podman local database volume folder
+wp-content-locked/
+
+# Ignore core WordPress system files (only track your custom code)
+wp-admin/
+wp-includes/
+*.php
+!.git/
+!wp-content/
+
+# Target your custom theme explicitly
+wp-content/*
+!wp-content/themes/
+wp-content/themes/*
+!wp-content/themes/beginner-developer-theme/
+
