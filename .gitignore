@@ -1,22 +1,31 @@
-# 1. Ignore core engine files loose in the root folder
+# 1. Ignore database volume layers and core server folders
+wp-content-locked/
 wp-admin/
 wp-includes/
-*.php
-LICENSE
-README.md
 
-# 2. Ignore database volume layers
-wp-content-locked/
+# 2. Block core root PHP scripts (Prevents pushing core engine files)
+/index.php
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
 
-# 3. Explicitly block core content subfolders while whitelisting your theme
+# 3. Block core content directories while keeping your custom theme
 wp-content/languages/
 wp-content/plugins/
 wp-content/uploads/
 wp-content/index.php
-
-# 4. Explicitly block default themes while whitelisting yours
+wp-content/themes/index.php
 wp-content/themes/twentytwentythree/
 wp-content/themes/twentytwentyfour/
 wp-content/themes/twentytwentyfive/
-wp-content/themes/index.php
 
