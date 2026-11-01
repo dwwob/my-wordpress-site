@@ -1,14 +1,13 @@
-# Ignore the Podman local database volume folder
+# Ignore the Podman database backup cache volume context
 wp-content-locked/
 
-# Ignore core WordPress system files (only track your custom code)
+# Exclude core server files (Only track your custom layouts)
 wp-admin/
 wp-includes/
 *.php
-!.git/
-!wp-content/
 
-# Target your custom theme explicitly
+# Explicitly bypass structural cascade rules to lock onto your custom theme folder
+!wp-content/
 wp-content/*
 !wp-content/themes/
 wp-content/themes/*
